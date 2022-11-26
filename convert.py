@@ -38,41 +38,42 @@
 # # Call the make_json function
 # make_json(csvFilePath, jsonFilePath)
 
-# import csv
-# import json
-
-# file = 'first_edit.csv'
-# json_file = 'output_data.json'
-
-# #Read CSV File
-# def read_CSV(file, json_file):
-#     csv_rows = []
-#     with open(file) as csvfile:
-#         reader = csv.DictReader(csvfile)
-#         field = reader.fieldnames
-#         for row in reader:
-#             csv_rows.extend([{field[i]:row[field[i]] for i in range(len(field))}])
-#         convert_write_json(csv_rows, json_file)
-
-# #Convert csv data into json
-# def convert_write_json(data, json_file):
-#     with open(json_file, "w") as f:
-#         f.write(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': '))) #for pretty
-#         f.write(json.dumps(data))
-
-
-# read_CSV(file,json_file)
-
-import pandas as pd
+import csv
 import json
-filepath = "first_edit.csv"
-output_path = "outputfile.json"
 
-df = pd.read_csv(filepath)
+file = 'crime_data2.csv'
+json_file = 'outputcrime.json'
 
-# Create a multiline json
-json_list = json.loads(df.to_json(orient = "records"))
 
-with open(output_path, 'w') as f:
-    for item in json_list:
-        f.write("%s\n" % item)
+#Read CSV File
+def read_CSV(file, json_file):
+    csv_rows = []
+    with open(file) as csvfile:
+        reader = csv.DictReader(csvfile)
+        field = reader.fieldnames
+        for row in reader:
+            csv_rows.extend([{field[i]:row[field[i]] for i in range(len(field))}])
+        convert_write_json(csv_rows, json_file)
+
+#Convert csv data into json
+def convert_write_json(data, json_file):
+    with open(json_file, "w") as f:
+        f.write(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': '))) #for pretty
+        f.write(json.dumps(data))
+
+
+read_CSV(file,json_file)
+
+# import pandas as pd
+# import json
+# filepath = "crime_data2.csv"
+# output_path = "outputcrime.json"
+
+# df = pd.read_csv(filepath)
+
+# # Create a multiline json
+# json_list = json.loads(df.to_json(orient = "records"))
+
+# with open(output_path, 'w') as f:
+#     for item in json_list:
+#         f.write("%s\n" % item)
