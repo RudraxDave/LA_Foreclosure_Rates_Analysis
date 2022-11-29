@@ -5,6 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 from matplotlib import pyplot
+from itertools import islice
+
 
 
 #PRE-PROCESSING DATASET #1
@@ -14,7 +16,7 @@ file_names = ['2014_Registered_Foreclosure_Properties.csv', '2015_Registered_For
                '2016_Registered_Foreclosure_Properties.csv', '2017_Registered_Foreclosure_Properties.csv',
                '2018_Registered_Foreclosure_Properties.csv', '2019_Registered_Foreclosure_Properties.csv']
 
-column_names = ['APN','Registered Date','Property Type','Property Address', 'Property City',
+column_names = ['APN','Registered Date','Property Type', 'Property Address', 'Property Zip',
                'Property State', 'Property Zip', 'Council District', 'Lender', 'Lender Contact'
                 'Lender Contact Phone', 'Property Management', 'Property Management Contact', 'Property Management Address',
                'Property Mgmt Contact Phone']
@@ -39,11 +41,22 @@ print(final.head())
 #CHARACTERISTICS OF THE DATA
 
 #DROP COLUMNS NOT IMPORTANT TO THIS STUDY
-final.drop(['Council District','Lender', 'Lender Contact', 'Lender Contact Phone', 'Property Management', 'Property Management Contact',  'Property Management Address', 'Property Management Contact Phone'], axis=1, inplace=True)
-print(final.head())
+final.drop(['APN', 'Council District','Lender', 'Lender Contact', 'Lender Contact Phone', 'Property Management', 'Property Management Contact',  'Property Management Address', 'Property Management Contact Phone'], axis=1, inplace=True)
+#print(final.head())
 
-print('DATA TYPES FOR VARIABLES IN DATASET:', '\n')
-final.info()
+#print('DATA TYPES FOR VARIABLES IN DATASET:', '\n')
+#final.info()
+
+df = pd.concat(
+    map(pd.read_csv, file_names), ignore_index=True)
+df.drop(['APN', 'Property Contact Phone', 'Property Location', 'Council District','Lender', 'Lender Contact', 'Lender Contact Phone', 'Property Management', 'Property Management Contact', 'Property Management Address','Property Address','Property City', 'Property State','Property Management Contact.1','Property on Map', 'Property Management Contact Phone', 'Longitude', 'Latitude','Property Mgmt Contact Phone'], axis=1, inplace=True)
+print(df)
+
+
+df.to_csv('foreclosed_4.csv')
+
+
+
 
 
 
@@ -61,11 +74,11 @@ for k,v in dataset.items():
             counter[item]+= 1
         tracker = tracker + 1
     year[k]= tracker
-    print("Propery Type Count In", k)
-    print(counter, '\n')
+    #print("Propery Type Count In", k)
+    #print(counter, '\n')
    
-print("Total Foreclosed Property Count Per Year")
-print(year)
+#print("Total Foreclosed Property Count Per Year")
+#print(year)
 
 #2014 -- 7599
 #2015 -- 8255
@@ -84,22 +97,21 @@ y4 = [56, 62, 72, 9, 25, 33]
 
   
 # Plotting the Data
-plt.plot(x1, y1, label='Multi-Family')
-plt.plot(x1, y2, label='Single Family')
-plt.plot(x1, y3, label='Vacant Residential')
-plt.plot(x1, y4, label='Non-Residential')
+# plt.plot(x1, y1, label='Multi-Family')
+# plt.plot(x1, y2, label='Single Family')
+# plt.plot(x1, y3, label='Vacant Residential')
+# plt.plot(x1, y4, label='Non-Residential')
 
-plt.xlabel('Year')
-plt.ylabel('Total Count')
-plt.title("Foreclosures Based on Property Type")
+# plt.xlabel('Year')
+# plt.ylabel('Total Count')
+# plt.title("Foreclosures Based on Property Type")
   
-plt.plot(y1, 'o:g', linestyle='--', linewidth='1')
-plt.plot(y2, 'o:b', linestyle='--', linewidth='1')
-plt.plot(y3, 'o:y', linestyle='--', linewidth='1')
-plt.plot(y4, 'o:r', linestyle='--', linewidth='1')
+# plt.plot(y1, 'o:g', linestyle='--', linewidth='1')
+# plt.plot(y2, 'o:b', linestyle='--', linewidth='1')
+# plt.plot(y3, 'o:y', linestyle='--', linewidth='1')
+# plt.plot(y4, 'o:r', linestyle='--', linewidth='1')
   
-plt.legend()
-
+# plt.legend()
 
 #Counting the most frequent foreclosed properties per year
 print('\n')
@@ -119,8 +131,22 @@ for k,v in dataset.items():
     
     back = dict(last_zip)
     
-    print('Zip Codes experencing highest foreclosure rates in Los Angeles in', k)
-    print(back, '\n')
+   # print('Zip Codes experencing highest foreclosure rates in Los Angeles in', k)
+    #print(back, '\n')
+
+holder = list(dataset['2014']['Registered Date'])
+
+for i in range(len(holder)):
+
+        pos = str(holder[i])
+        old_str = pos[:len(pos)-2]
+        new_str = old_str + "2014"
+        holder[i] = new_str
+
+dataset['2014']['Registered Date'] = holder
+
+    
+
 
 
 #Plotting zipcode freuqency
@@ -149,37 +175,38 @@ y10 = [231, 254, 245, 53, 97, 105]
 
 
 
+
+
 # Plotting the Data
-plt.plot(x1, y1, label='91344')
-plt.plot(x1, y2, label='91335')
-plt.plot(x1, y3, label='90019')
-plt.plot(x1, y4, label='90043')
-plt.plot(x1, y5, label='90011')
-plt.plot(x1, y6, label='91331')
-plt.plot(x1, y7, label='90003')
-plt.plot(x1, y8, label='91342')
-plt.plot(x1, y9, label='90044')
-plt.plot(x1, y10, label='90047')
+# plt.plot(x1, y1, label='91344')
+# plt.plot(x1, y2, label='91335')
+# plt.plot(x1, y3, label='90019')
+# plt.plot(x1, y4, label='90043')
+# plt.plot(x1, y5, label='90011')
+# plt.plot(x1, y6, label='91331')
+# plt.plot(x1, y7, label='90003')
+# plt.plot(x1, y8, label='91342')
+# plt.plot(x1, y9, label='90044')
+# plt.plot(x1, y10, label='90047')
 
 
-plt.xlabel('Year')
-plt.ylabel('Total Count')
-plt.title("Foreclosures Based on Zip Code")
+# plt.xlabel('Year')
+# plt.ylabel('Total Count')
+# plt.title("Foreclosures Based on Zip Code")
   
-plt.plot(y1, 'o:g', linestyle='--', linewidth='1')
-plt.plot(y2, 'o:b', linestyle='--', linewidth='1')
-plt.plot(y3, 'o:y', linestyle='--', linewidth='1')
-plt.plot(y4, 'o:r', linestyle='--', linewidth='1')
-plt.plot(y5, 'o:r', linestyle='--', linewidth='1')
-plt.plot(y6, 'o:r', linestyle='--', linewidth='1')
-plt.plot(y7, 'o:r', linestyle='--', linewidth='1')
-plt.plot(y8, 'o:r', linestyle='--', linewidth='1')
-plt.plot(y9, 'o:r', linestyle='--', linewidth='1')
-plt.plot(y10, 'o:r', linestyle='--', linewidth='1')
+# plt.plot(y1, 'o:g', linestyle='--', linewidth='1')
+# plt.plot(y2, 'o:b', linestyle='--', linewidth='1')
+# plt.plot(y3, 'o:y', linestyle='--', linewidth='1')
+# plt.plot(y4, 'o:r', linestyle='--', linewidth='1')
+# plt.plot(y5, 'o:r', linestyle='--', linewidth='1')
+# plt.plot(y6, 'o:r', linestyle='--', linewidth='1')
+# plt.plot(y7, 'o:r', linestyle='--', linewidth='1')
+# plt.plot(y8, 'o:r', linestyle='--', linewidth='1')
+# plt.plot(y9, 'o:r', linestyle='--', linewidth='1')
+# plt.plot(y10, 'o:r', linestyle='--', linewidth='1')
 
-plt.legend()
+# plt.legend()
 
-final.to_csv('foreclosed.csv')
 
 #PRE-PROCESSING DATASET #2
 
@@ -213,8 +240,8 @@ dataset2_df = pd.read_csv('first_edit.csv')
 #Dropping Columns that aren't important for this study
 dataset2_df.drop(['Part 1-2', 'Date Rptd',  'TIME OCC', 'Vict Age', 'Vict Sex', 'Vict Descent', 'Status', 'Status Desc', 'Weapon Desc', 'Crm Cd 2', 'Crm Cd 3', 'Crm Cd 4', 'Mocodes'], axis=1, inplace=True)
 print('DATA TYPES FOR VARIABLES IN DATASET:', '\n')
-#dataset2_df.info()
-#print(dataset2_df.head())
+dataset2_df.info()
+print(dataset2_df.head())
 
 #DATA VISUALIZATION
 #Crime rates per year
@@ -235,7 +262,11 @@ for date in dataset2_df['DATE OCC']:
     elif "2019" in hold:
         year_count["2019"] += 1
 
-#print(year_count)
+print('Total number of crimes per year')
+print(year_count)
+plt.bar(range(len(year_count)), list(year_count.values()), align='center')
+plt.xticks(range(len(year_count)), list(year_count.keys()))
+#plt.show()
 
 
 #sampling the dataset
@@ -247,35 +278,35 @@ count_2017 = 0
 count_2018 = 0
 count_2019 = 0
 
-for item, row in dataset2_df.iterrows():
-    date = str(row['DATE OCC'])
-    if "2014" in date and count_2014 != 2000:
-        lines.append(row)
-        count_2014 += 1
+#for item, row in dataset2_df.iterrows():
+  #  date = str(row['DATE OCC'])
+   # if "2014" in date and count_2014 != 2000:
+      #  lines.append(row)
+      #  count_2014 += 1
 
-    elif "2015" in date and count_2015 != 2000:
-        lines.append(row)
-        count_2015 += 1
+   # elif "2015" in date and count_2015 != 2000:
+     #   lines.append(row)
+     #   count_2015 += 1
 
-    elif "2016" in date and count_2016 != 2000:
-        lines.append(row)
-        count_2016 += 1
+   # elif "2016" in date and count_2016 != 2000:
+      #  lines.append(row)
+      #  count_2016 += 1
 
-    elif "2017" in date and count_2017 != 2000:
-        lines.append(row)
-        count_2017 += 1
+    #elif "2017" in date and count_2017 != 2000:
+      #  lines.append(row)
+      #  count_2017 += 1
 
-    elif "2018" in date and count_2018 != 2000:
-        lines.append(row)
-        count_2018 += 1
+    #elif "2018" in date and count_2018 != 2000:
+       # lines.append(row)
+       # count_2018 += 1
     
-    elif "2019" in date and count_2019 != 2000:
-        lines.append(row)
-        count_2019 += 1
+   # elif "2019" in date and count_2019 != 2000:
+     #   lines.append(row)
+     #   count_2019 += 1
 
-df = pd.DataFrame (lines, columns = dataset2_df.columns)
+#df = pd.DataFrame (lines, columns = dataset2_df.columns)
 
-df.to_csv('crime_data2.csv')
+#df.to_csv('crime_data2.csv')
 #dataset2_df.to_csv('crime_data.csv')
 
 
@@ -288,5 +319,21 @@ df.to_csv('crime_data2.csv')
 
 
 #Crime rates based on premise description
+premise = {}
+for i in dataset2_df["Premis Desc"]:
+    
+    if i not in premise:
+        premise[i] = 1
+    else:
+        premise[i] += 1
 
+import operator
+premise = dict( sorted(premise.items(), key=operator.itemgetter(1),reverse=True))
+def take(n, iterable):
+    "Return first n items of the iterable as a list"
+    return list(islice(iterable, n))
+premise = take(10, premise.items())
 
+print('Crime Rate Based on Premise Type')
+#for item in premise:
+ #   print(item)
