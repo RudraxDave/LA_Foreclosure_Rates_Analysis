@@ -8,10 +8,10 @@ This project aims to investigate the foreclosure rates in the city of Los Angele
 - [Datasets](#Datasets)
 - [Methodology](#Methodology)
 - [Results](#Results)
-- [Getting Started](#Getting Started)
+- [Getting Started](#Getting_Started)
 - [Dependencies](#Dependencies)
 - [Contributors](#Contributors)
-- [Class Details](#Class Details)
+- [Class Details](#Class_Details)
 - 
 ## Motivation
 The primary motivation behind this project is to shed light on the current foreclosure situation in Los Angeles and how it contributes to the wealth gap and social inequality. The project aims to identify the communities struggling the most with foreclosures and the communities trending towards a much higher foreclosure rate. By doing so, it can help policymakers and lawmakers make better-informed decisions when passing legislation to address the problem.
@@ -22,8 +22,8 @@ The goal of this project is to provide insights into the foreclosure rates in Lo
 ## Datasets
 This project uses two datasets:
 
-### Foreclosed Property in Los Angeles from 2014 to 2019: This dataset details all registered foreclosed properties in Los Angeles from 2014 to 2019, retrieved from the Los Angeles Housing Department.
-### Crime Data from 2010 to 2019: This dataset contains all incidents of crime that occurred in Los Angeles from 2010 to 2019.
+- Foreclosed Property in Los Angeles from 2014 to 2019: This dataset details all registered foreclosed properties in Los Angeles from 2014 to 2019, retrieved from the Los Angeles Housing Department. : https://data.lacity.org/Housing-and-Real-Estate/2019-Registered-Foreclosure-Properties/rsxb-x48z
+- Crime Data from 2010 to 2019: This dataset contains all incidents of crime that occurred in Los Angeles from 2010 to 2019. : https://data.lacity.org/Public-Safety/Crime-Data-from-2010-to-2019/63jg-8b9z
 
 ## Methodology
 The project follows the following methodology:
@@ -49,12 +49,14 @@ This project requires the following dependencies:
 
 - Python
 - MySQL
-- Flask
+- MySQL Workbench
+- pymysql
+- mysqlalchemy
 
 ## Contributors
 Sabrine Elfarissi
 
 ## Class Details
-This project is submitted for DSCI 551- Foundations of Data Management, 
+This project is submitted for DSCI 551- Foundations of Data Management
 Guided by
 Professor Wensheng Wu
