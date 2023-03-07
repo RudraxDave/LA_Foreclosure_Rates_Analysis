@@ -64,12 +64,12 @@ This project requires the following dependencies:
 ## Contributors
 Sabrine Elfarissi
 
-## YouTube
-https://www.youtube.com/watch?v=q3TGpaKt-UI
-
-[![FORECLOSURE RDX](https://img.youtube.com/vi/q3TGpaKt-UI/0.jpg)](https://www.youtube.com/watch?v=q3TGpaKt-UI)
-
 ## Class Details
 This project is submitted for DSCI 551- Foundations of Data Management
 Guided by
 Professor Wensheng Wu
+
+## YouTube
+https://www.youtube.com/watch?v=q3TGpaKt-UI
+
+[![FORECLOSURE RDX](https://img.youtube.com/vi/q3TGpaKt-UI/0.jpg)](https://www.youtube.com/watch?v=q3TGpaKt-UI)
