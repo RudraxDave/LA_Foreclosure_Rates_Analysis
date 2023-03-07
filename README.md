@@ -12,6 +12,7 @@ This project aims to investigate the foreclosure rates in the city of Los Angele
 - [Dependencies](#Dependencies)
 - [Contributors](#Contributors)
 - [Class Details](#Class_Details)
+- [YouTube](#YouTube)
 
 ## Motivation
 The primary motivation behind this project is to shed light on the current foreclosure situation in Los Angeles and how it contributes to the wealth gap and social inequality. The project aims to identify the communities struggling the most with foreclosures and the communities trending towards a much higher foreclosure rate. By doing so, it can help policymakers and lawmakers make better-informed decisions when passing legislation to address the problem.
@@ -66,7 +67,7 @@ Sabrine Elfarissi
 ## YouTube
 https://www.youtube.com/watch?v=q3TGpaKt-UI
 
-[![FORECLOSURE RDX](https://img.youtube.com/vi/q3TGpaKt-UI/0.jpg)](https://www.youtube.com/watch?v=CioX3-m47sk)
+[![FORECLOSURE RDX](https://img.youtube.com/vi/q3TGpaKt-UI/10.jpg)](https://www.youtube.com/watch?v=q3TGpaKt-UI)
 
 ## Class Details
 This project is submitted for DSCI 551- Foundations of Data Management
